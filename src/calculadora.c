@@ -53,7 +53,7 @@ struct calculadora_s {
 
 /**
  * @brief Función que permite buscar una operación en función de su operador
- * 
+ *
  * @param calculadora Puntero a la estructura con los datos de la calculadora
  * @param operador Operador que representa a la operación que se desea buscar
  * @return operacion_t Puntero a la estructura encontrada o NULL si la operación no existe
@@ -66,11 +66,11 @@ static operacion_t BuscarOperacion(calculadora_t calculadora, char operador);
 
 /* === Private function definitions ================================================================================ */
 
-static operacion_t BuscarOperacion(calculadora_t self, char operador){
+static operacion_t BuscarOperacion(calculadora_t self, char operador) {
     operacion_t operacion_actual = self->operacion;
 
-    while(operacion_actual != NULL){
-        if(operacion_actual->operador == operador){
+    while (operacion_actual != NULL) {
+        if (operacion_actual->operador == operador) {
             return operacion_actual;
         }
 
@@ -85,7 +85,7 @@ static operacion_t BuscarOperacion(calculadora_t self, char operador){
 calculadora_t CalculadoraCrear(void) {
     calculadora_t self = malloc(sizeof(struct calculadora_s));
 
-    if(self != NULL){
+    if (self != NULL) {
         self->operacion = NULL;
     }
 
@@ -95,12 +95,12 @@ calculadora_t CalculadoraCrear(void) {
 int CalculadoraAgregarOperacion(calculadora_t calculadora, char operador, calculadora_funciones_t funcion) {
     operacion_t operacion_buscada = BuscarOperacion(calculadora, operador);
 
-    if((calculadora == NULL) || (funcion == NULL) || (operacion_buscada != NULL)){
+    if ((calculadora == NULL) || (funcion == NULL) || (operacion_buscada != NULL)) {
         return 0;
     }
 
     operacion_t operacion_agregada = malloc(sizeof(struct operacion_s));
-    if(operacion_agregada != NULL){
+    if (operacion_agregada != NULL) {
         operacion_agregada->operador = operador;
         operacion_agregada->funcion = funcion;
         operacion_agregada->siguiente_operacion = calculadora->operacion;
@@ -112,19 +112,18 @@ int CalculadoraAgregarOperacion(calculadora_t calculadora, char operador, calcul
     return 0;
 }
 
-
-int CalculadoraCalcular(calculadora_t calculadora, const char * expresion) {
+int CalculadoraCalcular(calculadora_t calculadora, const char* expresion) {
     int op1 = 0;
     int op2 = 0;
     char operador = 0;
     int resultado = 0;
 
-    if((calculadora == NULL) || (expresion == NULL)){
+    if ((calculadora == NULL) || (expresion == NULL)) {
         return 0;
     }
 
-    for(int i=0; i < (int)strlen(expresion); i++){
-        if(isdigit(expresion[i]) == 0){
+    for (int i = 0; i < (int)strlen(expresion); i++) {
+        if (isdigit(expresion[i]) == 0) {
             operador = expresion[i];
             op1 = atoi(expresion);
             op2 = atoi(expresion + 1 + i);
@@ -134,13 +133,12 @@ int CalculadoraCalcular(calculadora_t calculadora, const char * expresion) {
 
     operacion_t operacion = BuscarOperacion(calculadora, operador);
 
-    if(operacion !=NULL){
-        resultado = operacion->funcion(op1,op2);
+    if (operacion != NULL) {
+        resultado = operacion->funcion(op1, op2);
 
         return resultado;
     }
 
     return 0;
-
 }
 /* === End of documentation ======================================================================================== */

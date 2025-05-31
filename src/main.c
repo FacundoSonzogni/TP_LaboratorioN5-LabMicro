@@ -37,20 +37,48 @@ SPDX-License-Identifier: MIT
 
 /* === Public variable definitions ================================================================================= */
 
-int OperacionSuma(int op1, int op2){
+/**
+ * @brief Función propia del programa principal para realizar un suma de 2 enteros
+ *
+ * @param op1 Primer operando de la suma
+ * @param op2 Segundo operando de la suma
+ * @return int Resultado de la suma
+ */
+int OperacionSuma(int op1, int op2) {
     return op1 + op2;
 }
 
-int OperacionResta(int op1, int op2){
+/**
+ * @brief Función propia del programa principal para realizar una resta de 2 enteros
+ *
+ * @param op1 Primer operando de la resta (minuendo)
+ * @param op2 Segundo operando de la resta (sustraendo)
+ * @return int Resultado de la resta
+ */
+int OperacionResta(int op1, int op2) {
     return op1 - op2;
 }
 
-int OperacionMultiplicacion(int op1, int op2){
+/**
+ * @brief Función propia del programa principal para realizar un producto de 2 enteros
+ *
+ * @param op1 Primer factor de la multiplicación
+ * @param op2 Segundo factor de la multiplicación
+ * @return int Resultado de la multiplicación
+ */
+int OperacionMultiplicacion(int op1, int op2) {
     return op1 * op2;
 }
 
-int OperacionDivisionEntera(int op1, int op2){
-    if (op2 != 0){
+/**
+ * @brief Función propia del programa principal para realizar una división entera entre 2 enteros Op1/Op2
+ *
+ * @param op1 Primer operando de la división entera (dividendo)
+ * @param op2 Segundo operando de la división entera (divisor)
+ * @return int Resultado de la división entera (si el divisor es 0, dará un mensaje de error y devolverá 0)
+ */
+int OperacionDivisionEntera(int op1, int op2) {
+    if (op2 != 0) {
         return op1 / op2;
     }
 

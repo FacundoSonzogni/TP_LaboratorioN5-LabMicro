@@ -24,6 +24,8 @@ SPDX-License-Identifier: MIT
 /** @file calculadoraa.h
  ** @brief Declaraciones del Módulo de Calculadora
  **
+ ** @addtogroup Calculadora Modulo de Gestion de la Calculadora
+ ** @{
  **/
 
 /* === Headers files inclusions ==================================================================================== */
@@ -38,14 +40,47 @@ extern "C" {
 
 /* === Public data type declarations =============================================================================== */
 
+//! Estructura que representa al objeto calculadora creada
+typedef struct calculadora_s * calculadora_t;
+
+//! Estructura de datos con las funciones que puede realizar la calculadora
+typedef int (*calculadora_funciones_t)(int, int);
+
 /* === Public variable declarations ================================================================================ */
 
 /* === Public function declarations ================================================================================ */
+
+/**
+ * @brief Función que permite crear una calculadora
+ * 
+ * @return calculadora_t Puntero a la estructura con los datos de la calculadora creada
+ */
+calculadora_t CalculadoraCrear(void);
+
+/**
+ * @brief Función que permite agregar una operación
+ * 
+ * @param calculadora Puntero a la estructura con los datos de la calculadora
+ * @param operador Simbolo que representa al operador con el que se realiza la operación que se agrega
+ * @param funcion Puntero a la función que describe como se realiza la operación que se agrega
+ * @return int 1 si pudo agregar la operación y 0 si NO pudo agregar la operación
+ */
+int CalculadoraAgregarOperacion(calculadora_t calculadora, char operador, calculadora_funciones_t funcion);
+
+/**
+ * @brief Función que permite realizar una operación
+ * 
+ * @param calculadora Puntero a la estructura con los datos de la calculadora
+ * @param expresion Expresión que representa la operación que se quiere realizar
+ * @return int Resultado de la operación
+ */
+int CalculadoraCalcular(calculadora_t calculadora, const char * expresion);
 
 /* === End of conditional blocks =================================================================================== */
 
 #ifdef __cplusplus
 }
 #endif
+//! @}
 
 #endif /* CALCULADORA_H */

@@ -24,6 +24,9 @@ SPDX-License-Identifier: MIT
 
 /* === Headers files inclusions ==================================================================================== */
 
+#include "calculadora.h"
+#include <stdio.h>
+
 /* === Macros definitions ========================================================================================== */
 
 /* === Private data type declarations ============================================================================== */
@@ -33,6 +36,48 @@ SPDX-License-Identifier: MIT
 /* === Private variable definitions ================================================================================ */
 
 /* === Public variable definitions ================================================================================= */
+
+int OperacionSuma(int op1, int op2){
+    return op1 + op2;
+}
+
+int OperacionResta(int op1, int op2){
+    return op1 - op2;
+}
+
+int OperacionMultiplicacion(int op1, int op2){
+    return op1 * op2;
+}
+
+int OperacionDivisionEntera(int op1, int op2){
+    if (op2 != 0){
+        return op1 / op2;
+    }
+
+    printf("ERROR: La division por 0 NO esta permitida \n");
+    return 0;
+}
+
+int main() {
+    const char suma[] = "45+13";
+    const char resta[] = "8-10";
+    const char producto[] = "15x6";
+    const char division[] = "15/3";
+
+    calculadora_t calculadora = CalculadoraCrear();
+
+    CalculadoraAgregarOperacion(calculadora, '+', OperacionSuma);
+    CalculadoraAgregarOperacion(calculadora, '-', OperacionResta);
+    CalculadoraAgregarOperacion(calculadora, 'x', OperacionMultiplicacion);
+    CalculadoraAgregarOperacion(calculadora, '/', OperacionDivisionEntera);
+
+    printf("%s = %i\n", suma, CalculadoraCalcular(calculadora, suma));
+    printf("%s = %i\n", resta, CalculadoraCalcular(calculadora, resta));
+    printf("%s = %i\n", producto, CalculadoraCalcular(calculadora, producto));
+    printf("%s = %i\n", division, CalculadoraCalcular(calculadora, division));
+
+    return 0;
+}
 
 /* === Private function definitions ================================================================================ */
 
